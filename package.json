@@ -1,0 +1,32 @@
+{
+  "name": "silly-redux-object-pooling-benchmarks",
+  "version": "1.0.0",
+  "description": "monorepo of object pool techniques",
+  "main": "src/index.js",
+  "scripts": {
+    "browser-benchmark": "node_modules/.bin/browserify benchmarks/pools.js",
+    "build": "node_modules/.bin/browserify benchmarks/pools.js -o benchmarks/bundle.js"
+  },
+  "keywords": [
+    "object",
+    "pool",
+    "redux",
+    "gc"
+  ],
+  "author": "Drew Petersen <kirbysayshi@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "aronnax-pooling": "^0.5.7",
+    "babel-cli": "^6.22.2",
+    "beautify-benchmark": "git@github.com:kirbysayshi/beautify-benchmark.git#v0.3.0",
+    "benchmark": "^2.1.3",
+    "browser-stdout": "^1.3.0",
+    "browserify": "^14.0.0",
+    "deepool": "^2.2.0",
+    "lerna": "2.0.0-beta.34",
+    "object-object-pool": "^1.0.0",
+    "opool": "^0.1.1",
+    "reuse-pool": "^1.0.2",
+    "smokestack": "^3.4.1"
+  }
+}
