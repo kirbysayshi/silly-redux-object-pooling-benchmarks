@@ -105,7 +105,7 @@ suite.add('reference-counted-free-list-pool', function() {
   action.payload = 1;
   state = reducer(state, action);
   rcflpool.release(action);
-})
+});
 
 suite.add('stack-pool', function() {
   var state = null;
@@ -114,7 +114,7 @@ suite.add('stack-pool', function() {
   action.payload = 1;
   state = reducer(state, action);
   stackpool.release(action);
-})
+});
 
 suite.add('fixed-stack-pool', function() {
   var state = null;
@@ -123,9 +123,9 @@ suite.add('fixed-stack-pool', function() {
   action.payload = 1;
   state = reducer(state, action);
   fixedstackpool.release(action);
-})
+});
 
-suite.add('deepool', function() {
+suite.add('deepool (external)', function() {
   var state = null;
   var action = dee.use();
   action.type = 'INC';
@@ -134,7 +134,7 @@ suite.add('deepool', function() {
   dee.recycle(action);
 });
 
-suite.add('object-object-pool', function() {
+suite.add('object-object-pool (external)', function() {
   var state = null;
   var action = oopool.alloc();
   action.type = 'INC';
@@ -143,7 +143,7 @@ suite.add('object-object-pool', function() {
   oopool.free(action);
 });
 
-suite.add('opool', function() {
+suite.add('opool (external)', function() {
   var state = null;
   var action = opool.get();
   action.type = 'INC';
@@ -152,7 +152,7 @@ suite.add('opool', function() {
   opool.release(action);
 });
 
-suite.add('aronnax-pooling', function() {
+suite.add('aronnax-pooling (external)', function() {
   var state = null;
   var action = AronnaxAction.make();
   action.type = 'INC';
@@ -161,7 +161,7 @@ suite.add('aronnax-pooling', function() {
   action.free();
 });
 
-suite.add('reuse-pool', function() {
+suite.add('reuse-pool (external)', function() {
   var state = null;
   var action = reusePool.get();
   action.type = 'INC';
@@ -176,6 +176,7 @@ suite.on('error', function (err) {
 
 suite.on('cycle', function(event) {
   benchmarks.add(event.target);
+  if (!global.document) return;
   var div = document.createElement('div');
   div.innerHTML = '<pre>' + String(event.target) + '</pre>';
   document.body.appendChild(div);
@@ -183,6 +184,7 @@ suite.on('cycle', function(event) {
 
 suite.on('complete', function(event) {
   benchmarks.log();
+  if (!global.document) return;
   var h1 = document.createElement('h1');
   h1.innerHTML = 'Benchmark Finished! Open the console.';
   document.body.appendChild(h1);
