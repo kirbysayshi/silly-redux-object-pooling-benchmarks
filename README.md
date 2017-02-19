@@ -3,7 +3,7 @@ Silly Redux Object Pooling Benchmarks
 
 I was using [Redux](https://github.com/reactjs/redux) for a game (aka lots of reducer updates at 60fps). Redux's philosophy necessitates lots of action object creation, and I wondered how detrimental that might be to my CPU due to garbage collection. Profiling using DevTools showed my app using around 8% of the time for GC in Chrome. These days most browsers have incremental garbage collectors, but garbage in a 60fps environment can still often cause pauses and drops.
 
-One classic technique to prevent excessive memory thrashing is [object pooling](http://gameprogrammingpatterns.com/object-pool.html). And it's been [1][1] mentioned [2][2] as a solution [3][3] for JS GC as well. So I wrote a simple Redux middleware that would release pooled action objects that use the same shape as [FSA](https://github.com/acdlite/flux-standard-action).
+One classic technique to prevent excessive memory thrashing is [object pooling](http://gameprogrammingpatterns.com/object-pool.html). And it's [been][1] [mentioned][2] as a [solution][3] for JS GC as well. So I wrote a simple Redux middleware that would release pooled action objects that use the same shape as [FSA](https://github.com/acdlite/flux-standard-action).
 
 And yet... I couldn't see improvements in my app when profiling!
 
@@ -126,11 +126,11 @@ Conclusions
 
 I have come to the following _possible_ conclusions (mostly hypotheses):
 
-A. All of my knowledge about GC and JS engines is likely irrelevant.
-B. My benchmarks are flawed (`<-- likely!` WTF is going on with Firefox!? Likely optimized out of existence...).
-C. Action objects are so "small" that the engine is quite good at quick allocation/creation.
-D. [Benchmark.js](https://github.com/bestiejs/benchmark.js) might not be able to show the effect of GC on a tight loop??
-E. JS GC has become so fast that worrying about allocations is misguided.
+1. All of my knowledge about GC and JS engines is likely irrelevant.
+2. My benchmarks are flawed (`<-- likely!` WTF is going on with Firefox!? Likely optimized out of existence...).
+3. Action objects are so "small" that the engine is quite good at quick allocation/creation.
+4. [Benchmark.js](https://github.com/bestiejs/benchmark.js) might not be able to show the effect of GC on a tight loop??
+5. JS GC has become so fast that worrying about allocations is misguided.
 
 Any input is greatly appreciated!
 
