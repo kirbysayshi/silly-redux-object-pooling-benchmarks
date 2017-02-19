@@ -1,5 +1,4 @@
-
-function RCFLPool (maker, initialCount) {
+function RCFLPool(maker, initialCount) {
   this.NEXT = '@@__next__';
   this.RC = '@@__rc__';
 
@@ -14,7 +13,7 @@ function RCFLPool (maker, initialCount) {
   this.allocate();
 }
 
-RCFLPool.prototype.allocate = function () {
+RCFLPool.prototype.allocate = function() {
   this.first = this.maker();
   this.prev = this.first;
 
@@ -27,9 +26,9 @@ RCFLPool.prototype.allocate = function () {
   }
 
   this.prev[this.NEXT] = null;
-}
+};
 
-RCFLPool.prototype.retain = function () {
+RCFLPool.prototype.retain = function() {
   if (this.first === null) {
     this.count = this.count * this.count;
     this.allocate();
@@ -40,9 +39,9 @@ RCFLPool.prototype.retain = function () {
   this.freeCount -= 1;
   free[this.RC] += 1;
   return free;
-}
+};
 
-RCFLPool.prototype.release = function (obj) {
+RCFLPool.prototype.release = function(obj) {
   obj[this.RC] -= 1;
   if (obj[this.RC] <= 0) {
     obj[this.RC] = 0;
@@ -50,6 +49,6 @@ RCFLPool.prototype.release = function (obj) {
     this.first = obj;
     this.freeCount += 1;
   }
-}
+};
 
 module.exports = RCFLPool;

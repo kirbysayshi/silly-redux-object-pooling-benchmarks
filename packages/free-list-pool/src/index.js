@@ -1,5 +1,4 @@
-
-function PoolES5 (maker, initialCount) {
+function PoolES5(maker, initialCount) {
   this.NEXT = '@@__next__';
   this.POOLED = '@@__pooled__';
   this.RETAINED = '@@__retained__';
@@ -15,7 +14,7 @@ function PoolES5 (maker, initialCount) {
   this.allocate();
 }
 
-PoolES5.prototype.allocate = function () {
+PoolES5.prototype.allocate = function() {
   this.first = this.maker();
   this.prev = this.first;
 
@@ -29,9 +28,9 @@ PoolES5.prototype.allocate = function () {
   }
 
   this.prev[this.NEXT] = null;
-}
+};
 
-PoolES5.prototype.retain = function () {
+PoolES5.prototype.retain = function() {
   if (this.first === null) {
     this.count = this.count * this.count;
     this.allocate();
@@ -42,13 +41,13 @@ PoolES5.prototype.retain = function () {
   this.freeCount -= 1;
   free[this.RETAINED] = true;
   return free;
-}
+};
 
-PoolES5.prototype.release = function (obj) {
+PoolES5.prototype.release = function(obj) {
   obj[this.RETAINED] = false;
   obj[this.NEXT] = this.first;
   this.first = obj;
   this.freeCount += 1;
-}
+};
 
 module.exports = PoolES5;

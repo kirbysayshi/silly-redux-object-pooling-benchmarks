@@ -26,7 +26,7 @@ if (!process || !process.stdout) {
 }
 
 // BEGIN Setup
-function reducer (state, action) {
+function reducer(state, action) {
   state = state || 0;
   var payload = action.payload;
   var type = action.type;
@@ -41,47 +41,58 @@ function reducer (state, action) {
       return state;
     }
 
-    default: return state;
+    default:
+      return state;
   }
 }
 
-function Action () {
+function Action() {
   this.type = '';
   this.payload = null;
 }
 
 var PREALLOC_AMOUNT = 100;
 var ACTION_COUNT = 100;
-var poolES5 = new PoolES5(function () {
-  return { type: '', payload: null }
-}, PREALLOC_AMOUNT);
-var dee = Deepool.create(function () {
-  return { type: '', payload: null }
+var poolES5 = new PoolES5(
+  function() {
+    return { type: '', payload: null };
+  },
+  PREALLOC_AMOUNT
+);
+var dee = Deepool.create(function() {
+  return { type: '', payload: null };
 });
 var oopool = new OOPool();
 var opool = new OPool(Action);
 var AronnaxAction = Object.create(Aronnax.Pooled);
-AronnaxAction.constructor = function () {
+AronnaxAction.constructor = function() {
   this.type = '';
   this.payload = null;
-}
-var reusePool = ReusePool(function () {
+};
+var reusePool = ReusePool(function() {
   return { type: '', payload: null };
 });
-var rcflpool = new RCFLPool(function () {
-  return { type: '', payload: null }
-}, PREALLOC_AMOUNT);
-var stackpool = new StackPool(function () {
-  return { type: '', payload: null }
-}, PREALLOC_AMOUNT);
-var fixedstackpool = new FixedStackPool(function () {
-  return { type: '', payload: null }
-}, PREALLOC_AMOUNT);
+var rcflpool = new RCFLPool(
+  function() {
+    return { type: '', payload: null };
+  },
+  PREALLOC_AMOUNT
+);
+var stackpool = new StackPool(
+  function() {
+    return { type: '', payload: null };
+  },
+  PREALLOC_AMOUNT
+);
+var fixedstackpool = new FixedStackPool(
+  function() {
+    return { type: '', payload: null };
+  },
+  PREALLOC_AMOUNT
+);
 // END Setup
 
-
-
-var suite = new Benchmark.Suite;
+var suite = new Benchmark.Suite();
 
 suite.add('vanilla-no-pool', function() {
   var state = null;
@@ -170,9 +181,9 @@ suite.add('reuse-pool (external)', function() {
   reusePool.recycle(action);
 });
 
-suite.on('error', function (err) {
+suite.on('error', function(err) {
   console.error(err);
-})
+});
 
 suite.on('cycle', function(event) {
   benchmarks.add(event.target);
@@ -190,4 +201,4 @@ suite.on('complete', function(event) {
   document.body.appendChild(h1);
 });
 
-suite.run({ 'async': true });
+suite.run({ async: true });
