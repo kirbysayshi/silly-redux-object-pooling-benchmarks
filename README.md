@@ -12,7 +12,7 @@ Therefore I wrote a few different approaches to pooling (and included some popul
 Running the Benchmarks
 ----------------------
 
-Visit the hosted benchmarks here: [https://github.io/kirbysayshi/silly-redux-object-pooling-benchmarks/benchmarks/index.html](https://github.io/kirbysayshi/silly-redux-object-pooling-benchmarks/benchmarks/index.html).
+Visit the hosted benchmarks here: [http://kirbysayshi.com/silly-redux-object-pooling-benchmarks/benchmarks/index.html](http://kirbysayshi.com/silly-redux-object-pooling-benchmarks/benchmarks/index.html).
 
 Or, run them locally:
 
