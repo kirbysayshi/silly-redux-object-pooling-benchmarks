@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "browser-benchmark": "node_modules/.bin/browserify benchmarks/pools.js",
-    "build": "node_modules/.bin/browserify benchmarks/pools.js -o benchmarks/bundle.js"
+    "build": "node_modules/.bin/browserify benchmarks/pools.js -o benchmarks/build/bundle.js",
+    "format": "prettier --write --single-quote packages/*/src/*.js benchmarks/*.js"
   },
   "keywords": [
     "object",
@@ -26,6 +27,7 @@
     "lerna": "2.0.0-beta.34",
     "object-object-pool": "^1.0.0",
     "opool": "^0.1.1",
+    "prettier": "^0.18.0",
     "reuse-pool": "^1.0.2",
     "smokestack": "^3.4.1"
   }
